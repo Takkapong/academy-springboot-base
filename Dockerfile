@@ -16,9 +16,8 @@ COPY src src
 RUN chmod +x gradlew
 RUN ./gradlew clean build -x test
 
-# =========================
 # runtime stage
-# =========================
+
 FROM eclipse-temurin:17
 WORKDIR /app
 

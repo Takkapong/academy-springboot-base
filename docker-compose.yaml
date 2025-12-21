@@ -1,15 +1,15 @@
 services:
   app:
     build:
-      context: ./
+      context: .
       dockerfile: Dockerfile
     working_dir: /app
     ports:
-      - 8080:8080
-      
-    tty: true
-    #volumes:
-     # - ./:/app  このせいで起動しなくなったからコメントアウトした
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/dev
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
     depends_on:
       - db
 
@@ -17,8 +17,6 @@ services:
     image: postgres:13.1
     container_name: db
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: "dev"
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dev
